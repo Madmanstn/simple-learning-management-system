@@ -4,7 +4,7 @@
             <!-- Header -->
             <div class="text-center">
                 <h2 class="text-4xl font-extrabold text-gray-900 mb-2">
-                    Welcome Back
+                    Welcome Back!
                 </h2>
                 <p class="text-gray-600">Sign in to continue to your account</p>
             </div>
