@@ -1,21 +1,19 @@
 <?php
-
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController; // add this
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Instructor\CourseController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\StudentCourseController;
+
 
 Route::get('/', function () {
     return redirect('/login');
 });
 
-
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Role-based dashboard
+Route::middleware(['auth', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -23,11 +21,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Instructor courses routes
 Route::middleware(['auth'])->prefix('instructor')->name('instructor.')->group(function () {
     Route::resource('courses', CourseController::class);
 });
 
-
+Route::middleware(['auth'])
+    ->prefix('student')
+    ->name('student.')
+    ->group(function () {
+        Route::get('/courses', [StudentCourseController::class, 'index'])
+            ->name('courses.index');
+    });
 require __DIR__.'/auth.php';
-
-
