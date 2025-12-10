@@ -6,8 +6,9 @@ use App\Http\Controllers\StudentCourseController;
 use App\Http\Controllers\Instructor\CourseController;
 use Illuminate\Support\Facades\Route;
 
+// ✅ UPDATED: Show the welcome page instead of redirecting
 Route::get('/', function () {
-    return redirect('/login');
+    return view('welcome');
 });
 
 // Role-based dashboard
