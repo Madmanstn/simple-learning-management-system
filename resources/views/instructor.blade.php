@@ -44,8 +44,8 @@
         </div>
 
         <!-- Quick Actions -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg min-h-[10px]">
                 <div class="p-6">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
                     <div class="space-y-3">
@@ -79,25 +79,50 @@
                 </div>
             </div>
 
-            <!-- Recent Activity -->
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <!-- Published Courses -->
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg md:col-span-2 min-h-[315px] mb-0.4">
                 <div class="p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
-                    <div class="space-y-4">
-                        <div class="text-center py-8 text-gray-500">
-                            <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
-                                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                            </svg>
-                            <p>No recent activity</p>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Published Courses</h3>
+
+                    <div class="flex space-x-4 overflow-x-auto pb-2">
+                        @forelse($courses as $course)
+                            <div class="flex-shrink-0 bg-white shadow-sm rounded-lg p-4 border border-gray-200 w-[240px] h-[260px]">
+                                <img src="{{ $course->thumbnail ? asset('storage/' . $course->thumbnail) : 'https://via.placeholder.com/320x120' }}"
+                                alt="Course Image"
+                                class="rounded-md mb-2 w-full h-28 object-cover">
+
+                            <div>
+                                <div class="flex justify-between items-center mb-1">
+                                    <h2 class="text-base font-semibold text-gray-800 truncate">{{ $course->title }}</h2>
+                                </div>
+
+                                <p class="text-gray-600 text-sm line-clamp-2">
+                                    {{ \Illuminate\Support\Str::limit($course->short_description, 80) }}
+                                </p>
+
+                                <p class="text-xs text-gray-500 mt-2">
+                                    {{ $course->enrolled_students_count > 0 
+                                        ? $course->enrolled_students_count . ' student' . ($course->enrolled_students_count !== 1 ? 's' : '') . ' enrolled' 
+                                        : 'No students enrolled yet' }}
+                                </p>
+                            </div>
+
+                            <a href="{{ route('student.courses.show', $course->id) }}"
+                                class="mt-2.5 inline-block px-3 py-1.5 bg-indigo-600 text-white text-xs rounded hover:bg-indigo-700 transition">
+                                    View Course
+                            </a>
                         </div>
-                    </div>
+                    @empty
+                        <div class="text-center py-20 text-gray-500 w-full">
+                            <p>No published courses yet.</p>
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>
 
         <!-- System Status -->
-        <div class="mt-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg md:col-span-3">
             <div class="p-6 flex items-center justify-between">
                 <div>
                     <h3 class="text-lg font-semibold text-gray-900">System Status</h3>

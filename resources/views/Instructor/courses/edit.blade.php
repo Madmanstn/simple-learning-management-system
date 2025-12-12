@@ -9,7 +9,8 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6">
-                    <form method="POST" action="{{ route('instructor.courses.update', $course) }}" class="space-y-6">
+                    <form method="POST" action="{{ route('instructor.courses.update', $course) }}" 
+                          enctype="multipart/form-data" class="space-y-6">
                         @csrf
                         @method('PUT')
 
@@ -65,6 +66,47 @@
                             @enderror
                             <p class="mt-1 text-xs text-gray-500">
                                 You can include YouTube embed codes, links to resources, or any text content.
+                            </p>
+                        </div>
+
+                        <!-- Course Image Upload -->
+                        <div>
+                            <label for="thumbnail" class="block text-sm font-medium text-gray-700 mb-1">
+                                Course Image
+                            </label>
+                            <input 
+                                type="file" 
+                                name="thumbnail" 
+                                id="thumbnail"
+                                accept="image/*"
+                                class="w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                            @error('thumbnail')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+
+                            @if($course->thumbnail)
+                                <img src="{{ asset('storage/' . $course->thumbnail) }}" 
+                                     alt="Course Image" 
+                                     class="mt-2 w-48 rounded-md shadow">
+                            @endif
+                        </div>
+
+                        <!-- File Uploads -->
+                        <div>
+                            <label for="resources" class="block text-sm font-medium text-gray-700 mb-1">
+                                Upload Lesson Files
+                            </label>
+                            <input 
+                                type="file" 
+                                name="resources[]" 
+                                id="resources" 
+                                multiple
+                                class="w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                            @error('resources')
+                                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                            <p class="mt-1 text-xs text-gray-500">
+                                You can upload PDFs, Word docs, or other supporting files.
                             </p>
                         </div>
 

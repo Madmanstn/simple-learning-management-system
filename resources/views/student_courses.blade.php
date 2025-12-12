@@ -28,6 +28,10 @@
                             By {{ $course->instructor->name ?? 'Unknown' }}
                         </p>
 
+                        <div class="text-xs text-gray-500 mt-2">
+                            {{ $course->created_at->format('M j, Y') }} • Updated {{ $course->updated_at->diffForHumans() }}
+                        </div>
+
                         <a href="{{ route('student.courses.show', $course->id) }}"
                            class="mt-4 inline-block px-4 py-2 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700 transition">
                             View Course

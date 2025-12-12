@@ -55,8 +55,8 @@
                                     {{ $course->short_description }}
                                 </p>
 
-                                <div class="text-xs text-gray-500 mb-4">
-                                    Created {{ $course->created_at->diffForHumans() }}
+                               <div class="text-xs text-gray-500 mb-4">
+                                    {{ $course->created_at->format('M j, Y') }} • Updated {{ $course->updated_at->diffForHumans() }}
                                 </div>
 
                                 <div class="flex gap-2">
