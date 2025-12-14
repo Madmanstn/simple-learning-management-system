@@ -60,7 +60,6 @@ npm run dev
 5. [john Lloyd Cañadora] - Developer
 
 ## Live Demo
-[Your deployed URL here]
-
+simple-learning-management-system-production-84db.up.railway.app
 
 
