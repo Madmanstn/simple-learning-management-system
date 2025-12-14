@@ -116,13 +116,6 @@ Access the app at:
 | **Jon Ethan Tio**       | Developer |
 | **John Lloyd Cañadora** | Developer |
 
----
-
-## 📄 License
-
-This project is licensed under the **MIT License**.
-
----
 
 <p align="center">
   <strong>Built with Laravel 💻 | Simple • Clean • Functional</strong>
