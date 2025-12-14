@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('courses', function (Blueprint $table) {
+         Schema::create('courses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('instructor_id')->constrained('users')->onDelete('cascade');
+            $table->string('title');
+            $table->text('short_description');
+            $table->longText('content');
+            $table->string('thumbnail')->nullable();
+            $table->enum('status', ['draft', 'published'])->default('draft');
             $table->timestamps();
         });
     }
