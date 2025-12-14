@@ -64,10 +64,7 @@
        class="flex-1 text-center px-3 py-2 bg-gray-100 text-gray-700 rounded-md text-sm font-medium hover:bg-gray-200">
         Edit
     </a>
-    <a href="{{ route('instructor.courses.applications', $course->id) }}"
-       class="flex-1 text-center px-3 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700">
-        Applications
-    </a>
+  
     <form action="{{ route('instructor.courses.destroy', $course) }}" 
           method="POST" 
           onsubmit="return confirm('Are you sure you want to delete this course?');">
